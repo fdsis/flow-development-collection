@@ -22,7 +22,6 @@ use Neos\Flow\ResourceManagement\ResourceMetaDataInterface;
 use Neos\Flow\ResourceManagement\ResourceRepository;
 use Neos\Flow\ResourceManagement\Storage\PackageStorage;
 use Neos\Flow\ResourceManagement\Storage\StorageInterface;
-use Neos\Flow\ResourceManagement\Storage\StorageObject;
 use Neos\Utility\Files;
 use Neos\Utility\Unicode\Functions as UnicodeFunctions;
 use Neos\Flow\ResourceManagement\Target\Exception as TargetException;
@@ -198,7 +197,6 @@ class FileSystemTarget implements TargetInterface
         $storage = $collection->getStorage();
         $this->checkAndRemovePackageSymlinks($storage);
         foreach ($collection->getObjects($callback) as $object) {
-            /** @var StorageObject $object */
             $sourceStream = $object->getStream();
             if ($sourceStream === false) {
                 $this->handleMissingData($object, $collection);

@@ -13,7 +13,7 @@ namespace Neos\FluidAdaptor\Service;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Reflection\ClassReflection;
-use Neos\FluidAdaptor\Core\ViewHelper\ArgumentDefinition;
+use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
 
 /**
  * XML Schema (XSD) Generator. Will generate an XML schema which can be used for auto-completion
@@ -99,10 +99,10 @@ class XsdGenerator extends AbstractGenerator
      */
     protected function addAttributes($className, \SimpleXMLElement $xsdElement)
     {
+        /** @var ViewHelperInterface $viewHelper */
         $viewHelper = $this->objectManager->get($className);
         $argumentDefinitions = $viewHelper->prepareArguments();
 
-        /** @var $argumentDefinition ArgumentDefinition */
         foreach ($argumentDefinitions as $argumentDefinition) {
             $xsdAttribute = $xsdElement->addChild('xsd:attribute');
             $xsdAttribute['type'] = 'xsd:string';

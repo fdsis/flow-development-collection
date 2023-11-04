@@ -47,12 +47,12 @@ class Response
     private $content = '';
 
     /**
-     * @var
+     * @var bool
      */
     private $colorSupport;
 
     /**
-     * @var
+     * @var int
      */
     private $outputFormat = self::OUTPUTFORMAT_STYLED;
 

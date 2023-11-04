@@ -249,14 +249,7 @@ class FlowAnnotationDriver implements DoctrineMappingDriverInterface, PointcutFi
             if ($tableAnnotation->uniqueConstraints !== null) {
                 foreach ($tableAnnotation->uniqueConstraints as $uniqueConstraint) {
                     $uniqueConstraint = ['columns' => $uniqueConstraint->columns];
-                    if (!empty($uniqueConstraint->options)) {
-                        $uniqueConstraint['options'] = $uniqueConstraint->options;
-                    }
-                    if (!empty($uniqueConstraint->name)) {
-                        $primaryTable['uniqueConstraints'][$uniqueConstraint->name] = $uniqueConstraint;
-                    } else {
-                        $primaryTable['uniqueConstraints'][] = $uniqueConstraint;
-                    }
+                    $primaryTable['uniqueConstraints'][] = $uniqueConstraint;
                 }
             }
 
@@ -915,7 +908,6 @@ class FlowAnnotationDriver implements DoctrineMappingDriverInterface, PointcutFi
     {
         $joinColumns = [];
 
-        /** @var ORM\JoinColumn $joinColumnAnnotation */
         if ($joinColumnAnnotation = $this->reader->getPropertyAnnotation($property, ORM\JoinColumn::class)) {
             $joinColumns[] = $this->joinColumnToArray($joinColumnAnnotation, strtolower($property->getName()));
         } elseif ($joinColumnsAnnotation = $this->reader->getPropertyAnnotation($property, ORM\JoinColumns::class)) {
